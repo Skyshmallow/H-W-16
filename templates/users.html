@@ -26,45 +26,9 @@
     <td>{{ profile['age'] }}</td>
     <td>{{ profile['email'] }}</td>
     <td class="d-flex">
-        <!-- Edit button triggers a modal with a form for editing -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ profile['id'] }}">
-            Edit
-        </button>
+        
 
-        <!-- Edit Profile Modal -->
-        <div class="modal fade" id="editModal{{ profile['id'] }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Edit Profile Form -->
-                        <form method="post" action="{{ url_for('update_profile_by_id', id=profile['id']) }}">
-                            <div class="mb-3">
-                                <label for="editLogin" class="form-label">Login</label>
-                                <input type="text" class="form-control" id="editLogin" name="login" value="{{ profile['login'] }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="editAge" class="form-label">Age</label>
-                                <input type="text" class="form-control" id="editAge" name="age" value="{{ profile['age'] }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="editEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="editEmail" name="email" value="{{ profile['email'] }}" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <form method="post" action="{{ url_for('delete_profile_by_id', id=profile['id']) }}">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+        <a href="{{ url_for('profile_details', id=profile['id']) }}" class="btn btn-info">Details</a>
     </td>
     <!-- Delete button remains the same
     <td>

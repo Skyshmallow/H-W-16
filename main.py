@@ -59,7 +59,7 @@ def update_profile_by_id(id):
             for key in request.form:
                 profile[key] = request.form[key]
             set_profiles_to_file(profiles)
-            return redirect(url_for('main'))
+            return redirect(url_for('profile_details', id=id))
     return jsonify_request(None, message=f"There is no such id: {id}")
 
 
@@ -75,6 +75,15 @@ def delete_profile_by_id(id):
         
     
     return jsonify_request(False, message=f"There is no such id to delete: {id}")
+
+
+@app.route("/profiles/details/<int:id>")
+def profile_details(id):
+    profiles = get_profiles_from_file()
+    for profile in profiles:
+        if profile.get("id") == id:
+            return render_template('profile_details.html', profile=profile)
+    return render_template('profile_details.html', profile=None, message=f"There is no such profile with that ID --> {id}")
 
 
 if __name__ == '__main__':
